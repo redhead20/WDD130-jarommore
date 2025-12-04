@@ -1,4 +1,4 @@
-/* Color palette */
+/* Color palette from site plan */
 :root {
   --primary: #1e352f;
   --secondary: #beef9e;
@@ -17,14 +17,14 @@
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
   background: var(--light-bg);
+  font-family: system-ui, sans-serif;
 }
 
-/* NAV */
+/* NAVIGATION */
 header {
   background: var(--primary);
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1rem;
 }
 
 nav {
@@ -35,15 +35,15 @@ nav {
 .nav-list {
   list-style: none;
   display: flex;
-  gap: 0.75rem;
+  gap: 0.8rem;
   padding: 0;
 }
 
 .nav-list a {
-  padding: 0.35rem 0.8rem;
-  color: white;
   text-decoration: none;
+  padding: 0.35rem 0.75rem;
   border-radius: 999px;
+  color: white;
 }
 
 .nav-list a.active {
@@ -51,7 +51,7 @@ nav {
   color: var(--primary);
 }
 
-/* PANEL */
+/* MAIN PANELS */
 main {
   max-width: var(--max-width);
   margin: 1.5rem auto;
@@ -62,32 +62,58 @@ main {
   background: white;
   border-radius: var(--radius);
   padding: 1.25rem;
-  border: 1px solid #d4ded1;
+  border: 1px solid #d5ded1;
+  margin-bottom: 1.5rem;
 }
 
-/* CIRCLE IMAGES */
-.circle-image {
+/* ------------------------------------------- */
+/*        HOME PAGE IMAGE SIZING FIX           */
+/* ------------------------------------------- */
+
+/* Wrapper: centers the images and limits size */
+.home-main-wrapper,
+.home-shelf1-wrapper,
+.home-shelf2-wrapper {
+  max-width: 350px;        /* shrink large images */
+  margin: 0 auto;
+}
+
+/* Images: scale down, keep border tight */
+.home-main-img,
+.home-shelf1-img,
+.home-shelf2-img {
   display: block;
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 50%;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
   border: 2px solid var(--accent1);
-  margin: 0 auto 0.5rem auto;
-  background: white;
 }
 
-/* Moosey LARGE at top */
+/* Shelves stacked neatly on mobile */
+.home-shelves {
+  display: grid;
+  gap: 1rem;
+}
+
+/* ------------------------------------------- */
+/*              MEESE PAGE                     */
+/* ------------------------------------------- */
+
+/* Moosey LARGE circle at the top */
 .moosey-large {
   width: 180px;
   height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent1);
+  display: block;
+  margin: 0 auto 0.5rem auto;
 }
 
-/* Moosey centered */
+/* Moosey centered container */
 .meese-top {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -95,24 +121,80 @@ main {
 .moosey-divider {
   border: none;
   border-top: 2px solid var(--accent1);
-  margin: 1.25rem 0 1.75rem 0;
+  margin: 1rem 0 1.5rem 0;
 }
 
-/* FOUNDERS GRID (12 founders below Moosey) */
+/* Founders arranged evenly */
 .founders-grid {
   display: grid;
   gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 
-/* Cards */
 .moose-card {
   text-align: center;
 }
 
-/* Responsive: force 2 rows of 6 on wide screens */
+/* Normal circle images */
+.circle-image {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent1);
+  display: block;
+  margin: 0 auto 0.5rem auto;
+}
+
+/* ------------------------------------------- */
+/*        INDIVIDUAL MOOSE PAGE SIZING         */
+/* ------------------------------------------- */
+
+.moose-detail-images img {
+  max-width: 300px;        /* smaller images on moosey page */
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 2px solid var(--accent1);
+  display: block;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------- */
+/* RESPONSIVE BEHAVIOR                         */
+/* ------------------------------------------- */
+
 @media (min-width: 780px) {
-  .founders-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+  .home-shelves {
+    grid-template-columns: 1fr 1fr; /* shelves side-by-side on bigger screens */
   }
+
+  .founders-grid {
+    grid-template-columns: repeat(6, 1fr); /* 2 rows of 6 founders */
+  }
+}
+/* Improve Name & Number layout on Meese page */
+
+.moose-card p {
+  margin: 0.25rem 0;
+}
+
+/* Make labels smaller and lighter */
+.moose-card p:nth-of-type(1),
+.moose-card p:nth-of-type(3) {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.35rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Make the values (actual names/numbers) stand out */
+.moose-card p:nth-of-type(2),
+.moose-card p:nth-of-type(4) {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.35rem;
 }
